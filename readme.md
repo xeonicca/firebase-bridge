@@ -26,3 +26,13 @@ Once logged in, you can now run deploy command
 ```
 firebase deploy
 ```
+
+## Code explain
+### authHandler.js
+Where auth magic happens
+
+### dataHandler.js
+Handle firestore read/write
+
+### storageHandler.js
+Handle cloud storage read/write
