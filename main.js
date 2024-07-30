@@ -48,6 +48,7 @@ async function handleAction(actionType, action, params) {
 }
 
 globalThis.addEventListener('message', async function({ data }) {
+  if(!data?.actionType) return
   const { action, actionType, params } = data
   handleAction(actionType, action, params)
 })
