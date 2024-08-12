@@ -22,6 +22,7 @@ initializeApp(firebaseConfig)
 const PARENT_FRAME = document.location.ancestorOrigins[0]
 
 function sendResponse(result) {
+  console.log(result)
   globalThis.parent.self.postMessage(JSON.stringify(result), PARENT_FRAME)
 }
 

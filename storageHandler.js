@@ -11,13 +11,12 @@ export const StorageActionEnums = {
 const filePath = 'events'
 const filename = 'manifest.json'
 
-
 const storageHandler = {
   [StorageActionEnums.Upload]: async () => {
     const storage = getStorage()
     const fileRef = ref(storage, `${filePath}/${filename}`)
     const data = await dataHandler(DataActionEnums.Read)
-    const jsonString = JSON.stringify(data)
+    const jsonString = JSON.stringify(transformer(data))
     const blob = new Blob([jsonString], { type: 'application/json' })
     await uploadBytes(fileRef, blob)
     return {
@@ -32,9 +31,22 @@ const storageHandler = {
   },
 }
 
-export default async function(action) {
+const transformer = (data) => {
+  return data.reduce((acc, criteria) => {
+    const trackSection = criteria.trackSection
+
+    if (!acc[trackSection]) {
+      acc[trackSection] = []
+    }
+
+    acc[trackSection].push(criteria)
+    return acc
+  }, {})
+}
+
+export default async function (action) {
   if (!storageHandler[action]) {
-    throw new Error(`Invalid storage action: ${action}`);
+    throw new Error(`Invalid storage action: ${action}`)
   }
-  return storageHandler[action]();
+  return storageHandler[action]()
 }

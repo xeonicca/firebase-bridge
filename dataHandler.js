@@ -1,4 +1,4 @@
-import { getFirestore, doc, collection, 
+import { getFirestore, doc, collection, query, where,
   setDoc, updateDoc, deleteDoc, getDocs } from 'firebase/firestore';
 
 export const DataActionType = 'data'
@@ -7,7 +7,9 @@ export const DataActionEnums = {
   Create: 'create',
   Read: 'read',
   Update: 'update',
+  Set: 'set',
   Delete: 'delete',
+  Check: 'check',
 }
 
 const modelName = 'events'
@@ -41,6 +43,15 @@ const dataHandler = {
     })
     return result
   },
+  [DataActionEnums.Set]: async () => dataHandler[DataActionEnums.Create],
+  [DataActionEnums.Check]: async (trackSection, trackId) => {
+    const db = getFirestore()
+    const queryRef = query(collection(db, modelName), 
+      where('trackSection', '==', trackSection),
+      where('trackId', '==', trackId))
+    const docSnap = await getDocs(queryRef)
+    return { exist: docSnap.size > 0 }
+  }
 }
 
 export default async function(action, params) {
