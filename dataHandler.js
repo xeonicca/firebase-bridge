@@ -44,13 +44,20 @@ const dataHandler = {
     return result
   },
   [DataActionEnums.Set]: async () => dataHandler[DataActionEnums.Create],
-  [DataActionEnums.Check]: async (trackSection, trackId) => {
+  [DataActionEnums.Check]: async (eventType, trackSection = null, trackId = null) => {
+    const result = []
+    const conditions = []
+    if (trackSection) conditions.push(where('trackSection', '==', trackSection))
+    if (trackId) conditions.push(where('trackId', '==', trackId))
     const db = getFirestore()
     const queryRef = query(collection(db, modelName), 
-      where('trackSection', '==', trackSection),
-      where('trackId', '==', trackId))
-    const docSnap = await getDocs(queryRef)
-    return { exist: docSnap.size > 0 }
+      where('eventType', '==', eventType),
+      ...conditions)
+    const querySnapshot = await getDocs(queryRef)
+    querySnapshot.forEach((doc) => {
+      result.push({ id: doc.id, ...doc.data()})
+    })
+    return result
   }
 }
 

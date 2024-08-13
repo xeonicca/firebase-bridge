@@ -90,8 +90,47 @@ window.postMessage({
   action: 'check',
   actionType: 'data',
   params: [
+    'click',
     'submit-form',
     'submit-button'
+  ]
+})
+```
+
+if track id is not known
+
+```
+window.postMessage({
+  action: 'check',
+  actionType: 'data',
+  params: [
+    'click',
+    'submit-form',
+  ]
+})
+```
+
+if track ssection is not known 
+```
+window.postMessage({
+  action: 'check',
+  actionType: 'data',
+  params: [
+    'click',
+    null,
+    'submit-button'
+  ]
+})
+```
+
+if only the event type is known
+
+```
+window.postMessage({
+  action: 'check',
+  actionType: 'data',
+  params: [
+    'click'
   ]
 })
 ```
