@@ -9,7 +9,7 @@ export const DataActionEnums = {
   Update: 'update',
   Set: 'set',
   Delete: 'delete',
-  Check: 'check',
+  Query: 'query',
 }
 
 const modelName = 'events'
@@ -44,7 +44,7 @@ const dataHandler = {
     return result
   },
   [DataActionEnums.Set]: async () => dataHandler[DataActionEnums.Create],
-  [DataActionEnums.Check]: async (eventType, trackSection = null, trackId = null) => {
+  [DataActionEnums.Query]: async (eventType, trackSection = null, trackId = null) => {
     const result = []
     const conditions = []
     if (trackSection) conditions.push(where('trackSection', '==', trackSection))

@@ -101,7 +101,7 @@ if track id is not known
 
 ```
 window.postMessage({
-  action: 'check',
+  action: 'query',
   actionType: 'data',
   params: [
     'click',
@@ -113,7 +113,7 @@ window.postMessage({
 if track ssection is not known 
 ```
 window.postMessage({
-  action: 'check',
+  action: 'query',
   actionType: 'data',
   params: [
     'click',
@@ -127,7 +127,7 @@ if only the event type is known
 
 ```
 window.postMessage({
-  action: 'check',
+  action: 'query',
   actionType: 'data',
   params: [
     'click'
