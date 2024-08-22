@@ -1,5 +1,6 @@
 import { getFirestore, doc, collection, query, where,
-  setDoc, updateDoc, deleteDoc, getDocs } from 'firebase/firestore';
+  setDoc, updateDoc, deleteDoc, getDocs } from 'firebase/firestore'
+import ShortUniqueId from 'short-unique-id'
 
 export const DataActionType = 'data'
 
@@ -14,24 +15,27 @@ export const DataActionEnums = {
 
 const modelName = 'events'
 
+
 const dataHandler = {
-  [DataActionEnums.Create]: async (key, payload) => {
+  [DataActionEnums.Create]: async (payload) => {
     const db = getFirestore()
-    const docRef = doc(db, modelName, key)
+    const uid = new ShortUniqueId({ length: 10 })
+    const id = uid.rnd().toLowerCase()
+    const docRef = doc(db, modelName, id)
     await setDoc(docRef, payload)
-    return { id: key, ...payload }
+    return { id, ...payload }
   },
-  [DataActionEnums.Update]: async (key, payload) => {
+  [DataActionEnums.Update]: async (id, payload) => {
     const db = getFirestore()
-    const docRef = doc(db, modelName, key)
+    const docRef = doc(db, modelName, id)
     await updateDoc(docRef, payload)
-    return { id: key, ...payload }
+    return { id: id, ...payload }
   },
-  [DataActionEnums.Delete]: async (key) => {
+  [DataActionEnums.Delete]: async (id) => {
     const db = getFirestore()
-    const docRef = doc(db, modelName, key)
+    const docRef = doc(db, modelName, id)
     await deleteDoc(docRef)
-    return { id: key }
+    return { id }
   },
   [DataActionEnums.Read]: async () => {
     const result = []

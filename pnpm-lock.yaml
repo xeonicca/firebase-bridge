@@ -11,6 +11,9 @@ importers:
       firebase:
         specifier: ^10.12.4
         version: 10.12.4
+      short-unique-id:
+        specifier: ^5.2.0
+        version: 5.2.0
     devDependencies:
       vite:
         specifier: ^5.3.4
@@ -567,6 +570,10 @@ packages:
 
   safevalues@0.6.0:
     resolution: {integrity: sha512-MZ7DcTOcIoPXN36/UONVE9BT0pmwlCr9WcS7Pj/q4FxOwr33FkWC0CUWj/THQXYWxf/F7urbhaHaOeFPSqGqHA==}
+
+  short-unique-id@5.2.0:
+    resolution: {integrity: sha512-cMGfwNyfDZ/nzJ2k2M+ClthBIh//GlZl1JEf47Uoa9XR11bz8Pa2T2wQO4bVrRdH48LrIDWJahQziKo3MjhsWg==}
+    hasBin: true
 
   source-map-js@1.2.0:
     resolution: {integrity: sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==}
@@ -1270,6 +1277,8 @@ snapshots:
   safe-buffer@5.2.1: {}
 
   safevalues@0.6.0: {}
+
+  short-unique-id@5.2.0: {}
 
   source-map-js@1.2.0: {}
 

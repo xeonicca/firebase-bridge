@@ -12,6 +12,7 @@
     "vite": "^5.3.4"
   },
   "dependencies": {
-    "firebase": "^10.12.4"
+    "firebase": "^10.12.4",
+    "short-unique-id": "^5.2.0"
   }
 }

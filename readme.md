@@ -45,7 +45,6 @@ window.postMessage({
   action: 'create',
   actionType: 'data',
   params: [
-    'test-event-123',
     {
       eventName: 'submit-form-button-clicked',
       eventType: 'click',
